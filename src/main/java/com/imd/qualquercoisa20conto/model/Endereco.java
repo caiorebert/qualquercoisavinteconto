@@ -10,6 +10,15 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 8)
+    private String cep;
+
+    @Column(length = 100)
+    private String rua;
+
+    @Column
+    private int numero;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
