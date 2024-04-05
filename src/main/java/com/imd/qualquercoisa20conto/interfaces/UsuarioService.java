@@ -1,4 +1,4 @@
 package com.imd.qualquercoisa20conto.interfaces;
 
-public interface AlunoService {
+public interface UsuarioService {
 }

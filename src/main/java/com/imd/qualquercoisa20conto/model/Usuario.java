@@ -15,10 +15,16 @@ public class Usuario {
     @Column(length = 100)
     private String nome;
 
+    @Column(length = 50)
+    private String email;
+
+    @Column(length = 20)
+    private String password;
+
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Set<Endereco> endereco;
 
-    @OneToOne
+    @OneToOne(mappedBy = "usuario")
     private Vendedor vendedor;
 
     public void setId(Long id) {
