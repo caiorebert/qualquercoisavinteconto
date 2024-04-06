@@ -14,6 +14,11 @@ public class VendedorServiceImpl implements VendedorService {
     VendedorRepository vendedorRepository;
 
     @Override
+    public Vendedor getVendedorById(Long id) {
+        return vendedorRepository.getVendedorById(id);
+    }
+
+    @Override
     public void safeDeleteById(Long id) {
         vendedorRepository.safeDeleteById(id, LocalDateTime.now());
     }

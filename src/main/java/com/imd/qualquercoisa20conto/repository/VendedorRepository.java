@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
 
+    Vendedor getVendedorById(Long id);
+
     @Query(value = "UPDATE Usuario u SET u.deletedAt = :timestamp where u.id = :id")
     void safeDeleteById(Long id, LocalDateTime timestamp);
 }

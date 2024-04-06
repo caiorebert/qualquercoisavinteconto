@@ -15,6 +15,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
     List<Produto> getAllProdutos();
 
+    Produto getProdutoById(Long id);
+
     @Query(value = "select p from Produto p where p.nome = :nome")
     List<Produto> getProdutosByNome(String nome);
 

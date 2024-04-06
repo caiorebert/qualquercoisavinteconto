@@ -49,10 +49,9 @@ public class EnderecoController {
     @RequestMapping("/enderecoCadastrado/{id}")
     public String cadastrarEndereco(@PathVariable("id") Long id, @ModelAttribute("endereco") Endereco endereco, Model model) {
         
-        Usuario usuario = usuarioService.findUsuarioById(id);
+        Usuario usuario = usuarioService.getUsuarioById(id);
        
          enderecoService.salvar(endereco);
-
 
          model.addAttribute("usuario", usuario);
          

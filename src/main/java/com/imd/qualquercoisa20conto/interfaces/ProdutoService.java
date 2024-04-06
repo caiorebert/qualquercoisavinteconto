@@ -11,6 +11,8 @@ public interface ProdutoService {
 
     public void safeDeleteById(Long id);
 
+    public Produto getProdutoById(Long id);
+
     public List<Produto> getAllProdutos();
 
     public List<Produto> getProdutosByVendedor(Vendedor vendedor);
