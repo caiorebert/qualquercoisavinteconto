@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.imd.qualquercoisa20conto.interfaces.ProdutoService;
 import com.imd.qualquercoisa20conto.interfaces.UsuarioService;
+import com.imd.qualquercoisa20conto.interfaces.VendedorService;
 import com.imd.qualquercoisa20conto.model.Endereco;
 import com.imd.qualquercoisa20conto.model.Usuario;
 import com.imd.qualquercoisa20conto.model.Vendedor;
@@ -22,12 +23,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    @AutoWired
+    @Autowired
     @Qualifier("usuarioServiceImpl")
     UsuarioService usuarioService;
 
-    @AutoWired
+    @Autowired
     ProdutoService produtoService;
+
+    @Autowired
+    VendedorService vendedorService;
 
     //direciona pra o formulario de cadastro do usuario
     @RequestMapping("/cadastrarUsuario")
@@ -87,6 +91,8 @@ public class UsuarioController {
                 model.addAttribute("usuario",usuario);
                 return "usuario/homepage";
             } else {
+                Vendedor vendedor = usuario.getVendedor();
+                model.addAttribute("vendedor",vendedor);
                 return "vendedor/homepage";
             }
 
