@@ -2,6 +2,8 @@ package com.imd.qualquercoisa20conto.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "produto")
 public class Produto {
@@ -9,6 +11,9 @@ public class Produto {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(length = 100)
+    private String nome;
 
     @Column
     private float preco;
@@ -19,6 +24,9 @@ public class Produto {
     @ManyToOne
     @JoinColumn(name = "vendedor_id")
     private Vendedor vendedor;
+
+    @Column
+    private LocalDateTime deletedAt;
 
     public void setId(Long id) {
         this.id = id;
@@ -50,5 +58,13 @@ public class Produto {
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
     }
 }

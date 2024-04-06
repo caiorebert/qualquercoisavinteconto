@@ -2,6 +2,7 @@ package com.imd.qualquercoisa20conto.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -27,6 +28,8 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario")
     private Vendedor vendedor;
 
+    private LocalDateTime deletedAt;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -41,5 +44,37 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Endereco> getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Set<Endereco> endereco) {
+        this.endereco = endereco;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
     }
 }

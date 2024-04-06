@@ -1,5 +1,7 @@
 package com.imd.qualquercoisa20conto.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
+    @Autowired
+    @Qualifier("usuarioServiceImpl")
     UsuarioService usuarioService;
 
     //direciona pra o formulario de cadastro do usuario
@@ -44,7 +48,7 @@ public class UsuarioController {
     public String Login(@ModelAttribute("email") String email,  @ModelAttribute("senha") String senha,
     Model model){
  
-        Usuario usuario = usuarioRepository.findUsuario(email, senha);
+        Usuario usuario = usuarioService.getUsuarioByEmail(email);
 
         if(usuario != null)
         {

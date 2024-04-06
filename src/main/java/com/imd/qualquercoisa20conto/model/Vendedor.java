@@ -13,6 +13,12 @@ public class Vendedor {
     @GeneratedValue
     private Long id;
 
+    @Column(length = 40)
+    private String nome;
+
+    @Column(length = 400)
+    private String descricao;
+
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -27,6 +33,22 @@ public class Vendedor {
 
     public Long getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public List<Produto> getProdutos() {
