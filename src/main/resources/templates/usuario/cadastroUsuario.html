@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualquerCoisa20Conto - Cadastro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav {
+            background-color: #131921;
+        }
+
+        .nav-itens{
+            display: flex;
+            align-items: center;
+        }
+
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            background-color: #FD9F0A;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #131921;
+            padding: 20px;
+        }
+
+        .cadastro-container {
+            background-color: #FD9F0A;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .form-control-lg {
+            font-size: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-lg {
+            padding: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .btn-cadastrar {
+            background-color: #131921;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-cadastrar:hover {
+            background-color: #000;
+        }
+
+        footer {
+            background-color: #131921;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand nav-itens" href="#">
+                <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
+                QualquerCoisa20Conto
+            </a>
+        </nav>
+    </header>
+    <main>
+        <img src="/images/Qualquercoisa20conto.png" width="500" height="500" alt="" style="margin-right: 40px;">
+        <div class="cadastro-container">
+            <form>
+                <div class="form-group">
+                    <label for="inputNome">Nome</label>
+                    <input type="text" class="form-control form-control-lg" id="inputNome" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control form-control-lg" id="inputEmail" placeholder="Seu email">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Senha</label>
+                    <input type="password" class="form-control form-control-lg" id="inputPassword" placeholder="Sua senha">
+                </div>
+                <div class="form-group">
+                    <label for="inputConfirmPassword">Confirmar Senha</label>
+                    <input type="password" class="form-control form-control-lg" id="inputConfirmPassword" placeholder="Confirme sua senha">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block btn-cadastrar">Cadastrar</button>
+            </form>
+        </div>
+    </main>
+    <footer class="text-light text-center py-3">
+        <p>&copy; 2024 QualquerCoisa20Conto - <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
+    </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

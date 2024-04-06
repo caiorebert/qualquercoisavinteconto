@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Pagamento</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #131921;
+        }
+
+        .nav-itens{
+            display: flex;
+            align-items: center;
+        }
+
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            background-color: #FD9F0A;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #131921;
+            padding: 20px;
+        }
+
+        .pagamento-container {
+            background-color: #FD9F0A;
+            padding: 40px;
+            border-radius: 10px;
+            width: 60%;
+            text-align: left;
+            position: relative;
+        }
+
+        .total {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .saldo {
+            font-size: 1.5rem;
+            text-align: left;
+        }
+
+        .resumo-pedido {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .produto {
+            margin-bottom: 10px;
+        }
+
+        .produto img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .produto .nome {
+            font-weight: bold;
+        }
+
+        .produto .preco {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .btn-confirmar {
+            background-color: #131921;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .btn-confirmar:hover {
+            background-color: #000;
+        }
+
+        footer {
+            background-color: #131921;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand nav-itens" href="#">
+                <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
+                QualquerCoisa20Conto
+            </a>
+        </nav>
+    </header>
+    <main>
+        <div class="pagamento-container">
+            <div class="total">Total da Compra: R$ 60,00</div>
+            <div class="saldo">Seu Saldo: R$ 100,00</div>
+            <div class="resumo-pedido">
+                <h4>Resumo do Pedido</h4>
+                <div class="produto">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_619596-MLB72483845489_102023-O.webp" alt="Produto 1">
+                    <span class="nome">Produto 1</span>
+                    <span class="preco">R$ 20,00</span>
+                </div>
+                <div class="produto">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_619596-MLB72483845489_102023-O.webp" alt="Produto 2">
+                    <span class="nome">Produto 2</span>
+                    <span class="preco">R$ 20,00</span>
+                </div>
+                <div class="produto">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_619596-MLB72483845489_102023-O.webp" alt="Produto 2">
+                    <span class="nome">Produto 2</span>
+                    <span class="preco">R$ 20,00</span>
+                </div>
+            </div>
+            <button class="btn btn-confirmar">Confirmar Pagamento</button>
+        </div>
+    </main>
+    <footer class="text-light text-center py-3">
+        <p>&copy; 2024 QualquerCoisa20Conto - <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
+    </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
