@@ -42,11 +42,14 @@ public class UsuarioController {
             return "redirect:/login";
         }
 
+        model.addAttribute("usuario",usuario);
+
         if(usuario.getVendedor()== null)
         {
-            model.addAttribute("usuario",usuario);
             return "redirect:/";
         }
+
+        model.addAttribute("vendedor", vendedorService.getVendedorById(usuario.getVendedor().getId()));
 
         return "usuario/escolhaLogin";
     }

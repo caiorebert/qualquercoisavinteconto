@@ -25,8 +25,7 @@ public class HomeController {
     ProdutoService produtoService;
 
     @RequestMapping("/")
-    public String home(HttpSession session, Model model){
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
+    public String home(@ModelAttribute("usuario") Usuario usuario, Model model){
         if (usuario!=null) {
             model.addAttribute("usuario", usuario);
         }
