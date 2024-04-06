@@ -1,6 +1,5 @@
 package com.imd.qualquercoisa20conto.controller;
 
-import com.imd.qualquercoisa20conto.model.Produto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,14 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import com.imd.qualquercoisa20conto.interfaces.ProdutoService;
 import com.imd.qualquercoisa20conto.interfaces.UsuarioService;
 import com.imd.qualquercoisa20conto.interfaces.VendedorService;
-import com.imd.qualquercoisa20conto.model.Endereco;
 import com.imd.qualquercoisa20conto.model.Usuario;
-import com.imd.qualquercoisa20conto.model.Vendedor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
-import java.util.List;
 
 
 @Controller
@@ -31,7 +26,6 @@ public class UsuarioController {
 
     @Autowired
     VendedorService vendedorService;
-
 
     @PostMapping("/logar")
     public String logarUsuario(String email, String password, Model model){

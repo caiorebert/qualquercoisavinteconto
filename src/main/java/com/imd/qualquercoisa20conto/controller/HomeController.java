@@ -3,6 +3,7 @@ package com.imd.qualquercoisa20conto.controller;
 import com.imd.qualquercoisa20conto.interfaces.ProdutoService;
 import com.imd.qualquercoisa20conto.model.Produto;
 import com.imd.qualquercoisa20conto.model.Usuario;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,8 @@ public class HomeController {
     ProdutoService produtoService;
 
     @RequestMapping("/")
-    public String home(@ModelAttribute("usuario") Usuario usuario, Model model){
+    public String home(HttpSession session, Model model){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
         if (usuario!=null) {
             model.addAttribute("usuario", usuario);
         }
@@ -40,7 +42,6 @@ public class HomeController {
 
     @RequestMapping("/cadastro")
     public String cadastro(Model model){
-
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
 
