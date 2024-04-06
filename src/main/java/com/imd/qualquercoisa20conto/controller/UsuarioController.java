@@ -92,7 +92,9 @@ public class UsuarioController {
                 return "usuario/homepage";
             } else {
                 Vendedor vendedor = usuario.getVendedor();
+                List<Produto> produtos = vendedor.getProdutos();
                 model.addAttribute("vendedor",vendedor);
+                model.addAttribute("produtos", produtos);
                 return "vendedor/homepage";
             }
 
