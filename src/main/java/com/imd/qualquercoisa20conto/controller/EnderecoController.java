@@ -19,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @Controller
 @RequestMapping("/endereco")
@@ -31,30 +33,26 @@ public class EnderecoController {
     @Autowired
     UsuarioService usuarioService;
 
-    @RequestMapping("/cadastraEndereco")
-    public String addEndereco(@ModelAttribute("usuario") Usuario usuario, Model model) {
+    @RequestMapping("/cadastraEndereco/{id}")
+    public String addEndereco(@PathVariable("id") Long id, Model model) {
+
+        Usuario usuario = usuarioService.findUsuarioById(id);
 
         Endereco endereco = new Endereco();
+        
+        model.addAttribute("usuario", usuario);
         model.addAttribute("endereco", endereco);
 
         return "endereco/cadastro";
     }
 
-    @RequestMapping("/enderecoCadastrado")
-    public String cadastrarEndereco(@ModelAttribute("endereco") Endereco endereco, Model model) {
+    @RequestMapping("/enderecoCadastrado/{id}")
+    public String cadastrarEndereco(@PathVariable("id") Long id, @ModelAttribute("endereco") Endereco endereco, Model model) {
         
-         // Obtém o email do usuário atualmente logado
-         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-         String email = authentication.getName();
-         
-         // Obtém o usuário com base no email
-         Usuario usuario = usuarioService.getUsuarioByEmail(email);
-         
-         // Associa o novo endereço ao usuário
-         endereco.setUsuario(usuario);
-         
-         // Salva o endereço no banco de dados
-         usuario.setEndereco(endereco);
+        Usuario usuario = usuarioService.findUsuarioById(id);
+       
+         enderecoService.salvar(endereco);
+
 
          model.addAttribute("usuario", usuario);
          
