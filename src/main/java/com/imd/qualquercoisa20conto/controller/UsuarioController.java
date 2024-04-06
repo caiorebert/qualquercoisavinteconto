@@ -1,10 +1,9 @@
 package com.imd.qualquercoisa20conto.controller;
 
+import com.imd.qualquercoisa20conto.model.Produto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.imd.qualquercoisa20conto.interfaces.ProdutoService;
 import com.imd.qualquercoisa20conto.interfaces.UsuarioService;
@@ -13,10 +12,10 @@ import com.imd.qualquercoisa20conto.model.Endereco;
 import com.imd.qualquercoisa20conto.model.Usuario;
 import com.imd.qualquercoisa20conto.model.Vendedor;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.util.List;
 
 
 @Controller
@@ -33,71 +32,58 @@ public class UsuarioController {
     @Autowired
     VendedorService vendedorService;
 
-    //direciona pra o formulario de cadastro do usuario
-    @RequestMapping("/cadastrarUsuario")
-    public String cadastrarUsuario(Model model){
 
-        Usuario usuario = new Usuario();
-        model.addAttribute("usuario", usuario);
+    @PostMapping("/logar")
+    public String logarUsuario(String email, String senha, Model model){
 
+        Usuario usuario = usuarioService.getUsuarioByEmail(email);
+
+        if (usuario==null) {
+            model.addAttribute("errors", "O E-mail informado não existe no sistema.");
+            return "redirect:/login";
+        }
+
+        if (!usuario.getPassword().equals(senha)) {
+            model.addAttribute("errors", "Senha incorreta.");
+            return "redirect:/login";
+        }
+
+        if(usuario.getVendedor()== null)
+        {
+            model.addAttribute("usuario",usuario);
+            return "redirect:/";
+        }
+
+        return "usuario/escolhaLogin";
+    }
+
+    @RequestMapping("/novo")
+    public String addUsuario(Model model){
+        model.addAttribute("usuario", new Usuario());
         return "usuario/cadastro";
     }
 
-    //cadastrou o usuario e direciona pra pagina de login
-    @RequestMapping("/usuarioCadastrado")
-    public String addUsuario(@ModelAttribute("usuario") Usuario usuario,  
-    Model model){
+    @RequestMapping("/edit/{id}")
+    public String editUsuario(@PathVariable("id") Long id, Model model){
+        Usuario usuario = usuarioService.getUsuarioById(id);
+        model.addAttribute("usuario", usuario);
+        return "usuario/cadastro";
+    }
 
+    @RequestMapping("/save")
+    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario, Model model){
         usuarioService.salvar(usuario);
-
-        return "home/";
+        model.addAttribute("usuario", usuario);
+        return "redirect:/";
     }
 
-    //ao tentar fazer login, verifica se o usuario e senha existem
-    //se o usuario tiver cadastro de vendedor, vai pra uma pagina de escolha, senao vai pra homepage de usuario
-    @RequestMapping("/usuarioLogin")
-    public String Login(@ModelAttribute("email") String email,  @ModelAttribute("senha") String senha,
-    Model model){
- 
-        Usuario usuario = usuarioService.getUsuarioByEmail(email);
-
-        if(usuario != null)
-        {
-            if(usuario.getVendedor()!= null)
-            {
-                model.addAttribute("usuario",usuario);
-                return "usuario/escolhaTipo";
-            }
-            else
-            {
-                model.addAttribute("usuario",usuario);
-                return "usuario/homepage";
-            }
-        }
-        else
-        {
-            return "redirect:home/";
-        }
-        
- 
-    }
-
-    //caso o usuario tenha cadastro de vendedor, recebe resposta do form, na variavel tipo, pra saber se o usuario quer continuar como Cliente ou como Vendedor
     @RequestMapping("/escolhaTipoLogin")
-    public String verificaLogado(@ModelAttribute("usuario") Usuario usuario, @ModelAttribute("tipo") String tipo,
-    Model model){
-
-            if (tipo.equals("Cliente")) {
-                model.addAttribute("usuario",usuario);
-                return "usuario/homepage";
-            } else {
-                Vendedor vendedor = usuario.getVendedor();
-                List<Produto> produtos = vendedor.getProdutos();
-                model.addAttribute("vendedor",vendedor);
-                model.addAttribute("produtos", produtos);
-                return "vendedor/homepage";
-            }
-
+    public String verificaLogado(@ModelAttribute("usuario") Usuario usuario, boolean tipo){
+        if (tipo) {
+            return "redirect:/";
+        } else {
+            return "redirect:/vendedor/" + usuario.getVendedor().getId();
+        }
     }
 
 }

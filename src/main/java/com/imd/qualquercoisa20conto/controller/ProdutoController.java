@@ -52,7 +52,14 @@ public class ProdutoController {
     public String editarProduto(@PathVariable Long id, Model model){
         Produto produto = produtoService.getProdutoById(id);
         model.addAttribute("produto", produto);
-        return "produto/editar";
+        return "produto/cadastrar";
+    }
+
+    @RequestMapping("/save")
+    public String editarProduto(@ModelAttribute("produto") Produto produto, Model model){
+        produtoService.salvar(produto);
+        model.addAttribute("produto", produto);
+        return "produto/cadastrar";
     }
 
     @RequestMapping("/deletar/{id}")

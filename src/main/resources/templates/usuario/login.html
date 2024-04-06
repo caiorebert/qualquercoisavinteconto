@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,7 +94,7 @@
     <main>
         <img src="/images/Qualquercoisa20conto.png" width="400" height="400" alt="" style="margin-right: 40px;">
         <div class="login-container">
-            <form>
+            <form method="post" action="/usuario/logar">
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
                     <input type="email" class="form-control form-control-lg" id="inputEmail" aria-describedby="emailHelp" placeholder="Seu email">
@@ -103,7 +103,7 @@
                     <label for="inputPassword">Senha</label>
                     <input type="password" class="form-control form-control-lg" id="inputPassword" placeholder="Sua senha">
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block btn-entrar">Entrar</button>
+                <input type="submit" class="btn btn-primary btn-lg btn-block btn-entrar" value="Entrar">
             </form>
         </div>
     </main>

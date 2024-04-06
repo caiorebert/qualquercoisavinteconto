@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/endereco")
@@ -31,31 +33,66 @@ public class EnderecoController {
     EnderecoService enderecoService;
 
     @Autowired
+    @Qualifier("usuarioServiceImpl")
     UsuarioService usuarioService;
 
-    @RequestMapping("/cadastraEndereco/{id}")
-    public String addEndereco(@PathVariable("id") Long id, Model model) {
+    @RequestMapping("/{usuario_id}/listar")
+    public String listarEnderecos(@PathVariable("usuario_id") Long usuario_id, Model model) {
+        Usuario usuario = usuarioService.getUsuarioById(usuario_id);
 
-        Usuario usuario = usuarioService.getUsuarioById(id);
+        List<Endereco> enderecos = enderecoService.getEnderecosByUsuario(usuario);
+
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("endereco", enderecos);
+
+        return "endereco/cadastro";
+    }
+
+    @RequestMapping("/{usuario_id}/novo")
+    public String addEndereco(@PathVariable("usuario_id") Long usuario_id, Model model) {
+        Usuario usuario = usuarioService.getUsuarioById(usuario_id);
 
         Endereco endereco = new Endereco();
-        
+
         model.addAttribute("usuario", usuario);
         model.addAttribute("endereco", endereco);
 
         return "endereco/cadastro";
     }
 
-    @RequestMapping("/enderecoCadastrado/{id}")
-    public String cadastrarEndereco(@PathVariable("id") Long id, @ModelAttribute("endereco") Endereco endereco, Model model) {
-        
-        Usuario usuario = usuarioService.getUsuarioById(id);
-       
-         enderecoService.salvar(endereco);
+    @RequestMapping("/editar/{id}")
+    public String editEndereco(@PathVariable("id") Long id, Model model) {
 
-         model.addAttribute("usuario", usuario);
-         
-         return "usuario/homepage";
+        Endereco endereco = enderecoService.getEnderecoById(id);
+
+        model.addAttribute("endereco", endereco);
+
+        return "endereco/cadastro";
+    }
+
+    @RequestMapping("/save")
+    public String saveEndereco(@ModelAttribute("endereco") Endereco endereco, Model model) {
+
+        if (endereco.getId()==null) {
+            enderecoService.salvar(endereco);
+            return "endereco/cadastro";
+        }
+
+        model.addAttribute("endereco", endereco);
+        enderecoService.salvar(endereco);
+        return "endereco/cadastro";
+    }
+
+    @RequestMapping("/deletar/{id}")
+    public String deletarEndereco(@PathVariable("id") Long id, @ModelAttribute("endereco") Endereco endereco, Model model) {
+
+        Usuario usuario = usuarioService.getUsuarioById(id);
+
+        enderecoService.salvar(endereco);
+
+        model.addAttribute("usuario", usuario);
+
+        return "redirect:/" + usuario.getId().toString() + "/listar";
     }
 
 }

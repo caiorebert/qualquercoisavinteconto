@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Component
 public class UsuarioServiceImpl implements UsuarioService {
 
+    @Autowired
     UsuarioRepository usuarioRepository;
 
     @Override

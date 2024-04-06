@@ -21,6 +21,9 @@ public class Produto {
     @Column
     private int quantidade;
 
+    @Column(length = 400)
+    private String image;
+
     @ManyToOne
     @JoinColumn(name = "vendedor_id")
     private Vendedor vendedor;
@@ -66,5 +69,21 @@ public class Produto {
 
     public String getNome() {
         return nome;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

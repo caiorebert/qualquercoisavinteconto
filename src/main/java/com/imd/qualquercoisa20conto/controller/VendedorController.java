@@ -37,14 +37,20 @@ public class VendedorController {
     VendedorService vendedorService;
 
     @Autowired
+    @Qualifier("produtoServiceImpl")
+    ProdutoService produtoService;
+
+    @Autowired
     UsuarioService usuarioService;
 
-    @RequestMapping("/cadastraVendedor/{id}")
-    public String addVendedor(@PathVariable("id") Long id, Model model) {
+    @RequestMapping("/{usuario_id}/novo")
+    public String addVendedor(@PathVariable("usuario_id") Long usuario_id, Model model) {
 
-        Usuario usuario = usuarioService.getUsuarioById(id);
-
+        Usuario usuario = usuarioService.getUsuarioById(usuario_id);
         Vendedor vendedor = new Vendedor();
+
+        usuario.setVendedor(vendedor);
+        vendedor.setUsuario(usuario);
 
         model.addAttribute("usuario", usuario);
         model.addAttribute("vendedor", vendedor);
@@ -52,16 +58,39 @@ public class VendedorController {
         return "vendedor/cadastro";
     }
 
-    @RequestMapping("/vendedorCadastrado/{vendedor}")
-    public String vendedorCadastrado(@PathVariable("vendedor") Vendedor vendedor, Model model) {
-        
-        
+    @RequestMapping("/edit/{id}")
+    public String editVendedor(@PathVariable("id") Long id, Model model) {
+
+        Vendedor vendedor = vendedorService.getVendedorById(id);
+
+        model.addAttribute("usuario", vendedor.getUsuario());
         model.addAttribute("vendedor", vendedor);
 
-        return "vendedor/homepage";
-
-
+        return "vendedor/cadastro";
     }
-    
 
+    @RequestMapping("/save")
+    public String saveVendedor(@ModelAttribute("vendedor") Vendedor vendedor,
+                               Model model) {
+        vendedorService.salvar(vendedor);
+        model.addAttribute("vendedor", vendedor);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/{id}")
+    public String vendedorCadastrado(@PathVariable("id") Long id, Model model) {
+        Vendedor vendedor = vendedorService.getVendedorById(id);
+        List<Produto> produtos = produtoService.getProdutosByVendedor(vendedor);
+
+        model.addAttribute("vendedor", vendedor);
+        model.addAttribute("produtos", produtos);
+
+        return "vendedor/index";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteVendedor(@PathVariable("id") Long id, Model model) {
+        vendedorService.safeDeleteById(id);
+        return "vendedor/index";
+    }
 }

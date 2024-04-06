@@ -6,11 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 
+    @Query(value = "select e from Endereco e where e.id = :id")
+    Endereco getEnderecoById(Long id);
+
     @Query(value = "select e from Endereco e where e.usuario = :usuario")
-    Endereco getEnderecoByIdUsuario(Usuario usuario);
+    List<Endereco> getEnderecosByIdUsuario(Usuario usuario);
 
     @Query(value = "UPDATE Usuario u SET u.deletedAt = :timestamp where u.id = :id")
     void safeDeleteById(Long id, LocalDateTime timestamp);
