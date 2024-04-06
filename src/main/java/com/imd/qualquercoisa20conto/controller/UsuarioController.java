@@ -34,7 +34,7 @@ public class UsuarioController {
 
 
     @PostMapping("/logar")
-    public String logarUsuario(String email, String senha, Model model){
+    public String logarUsuario(String email, String password, Model model){
 
         Usuario usuario = usuarioService.getUsuarioByEmail(email);
 
@@ -43,7 +43,7 @@ public class UsuarioController {
             return "redirect:/login";
         }
 
-        if (!usuario.getPassword().equals(senha)) {
+        if (!usuario.getPassword().equals(password)) {
             model.addAttribute("errors", "Senha incorreta.");
             return "redirect:/login";
         }

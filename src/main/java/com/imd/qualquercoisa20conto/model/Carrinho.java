@@ -2,6 +2,8 @@ package com.imd.qualquercoisa20conto.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "carrinho")
 public class Carrinho {
@@ -9,6 +11,9 @@ public class Carrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "")
+    private List<Produto> produtos;
 
     @OneToOne
     @JoinColumn(name = "usuario_id")
