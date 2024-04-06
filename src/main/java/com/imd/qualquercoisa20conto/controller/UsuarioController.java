@@ -13,13 +13,20 @@ import com.imd.qualquercoisa20conto.model.Usuario;
 import com.imd.qualquercoisa20conto.model.Vendedor;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 
 
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
 
+    @AutoWired
+    @Qualifier("usuarioServiceImpl")
     UsuarioService usuarioService;
+
+    @AutoWired
     ProdutoService produtoService;
 
     //direciona pra o formulario de cadastro do usuario
