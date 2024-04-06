@@ -25,6 +25,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Usuario getUsuarioById(Long id) {
+        return usuarioRepository.getUsuarioById(id);
+    }
+
+    @Override
     public Usuario getUsuarioByEmail(String email) {
         return usuarioRepository.getUsuarioByEmail(email);
     }

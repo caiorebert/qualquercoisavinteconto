@@ -8,5 +8,7 @@ public interface UsuarioService {
 
     public void safeDeleteById(Long id);
 
+    public Usuario getUsuarioById(Long id);
+
     public Usuario getUsuarioByEmail(String email);
 }
