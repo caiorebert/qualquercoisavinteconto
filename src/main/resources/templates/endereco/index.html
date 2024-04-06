@@ -1,11 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualquerCoisa20Conto - Lista de Endereços</title>
     <link rel="icon" type="image/png" href="/images/Qualquercoisa20conto.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav {
+            background-color: #131921;
+        }
+
+        .nav-itens{
+            display: flex;
+            align-items: center;
+        }
+
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            background-color: #FD9F0A;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #131921;
+            padding: 20px;
+        }
+
+        .endereco-list {
+            background-color: #FD9F0A;
+            padding: 40px;
+            border-radius: 10px;
+            width: 60%;
+            text-align: left;
+        }
+
+        .endereco-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .endereco-item h4 {
+            margin-bottom: 10px;
+        }
+
+        .endereco-item p {
+            margin-bottom: 5px;
+        }
+
+        footer {
+            background-color: #131921;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand nav-itens" href="#">
+                <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
+                QualquerCoisa20Conto
+            </a>
+        </nav>
+    </header>
+    <main>
+        <div class="endereco-list">
+            <div class="endereco-item">
+                <h4>Endereço 1</h4>
+                <p>CEP: 12345-678</p>
+                <p>Rua: Exemplo, 123</p>
+            </div>
+            <div class="endereco-item">
+                <h4>Endereço 2</h4>
+                <p>CEP: 98765-432</p>
+                <p>Rua: Teste, 456</p>
+            </div>
+            <div class="endereco-item">
+                <h4>Endereço 3</h4>
+                <p>CEP: 54321-876</p>
+                <p>Rua: Lorem Ipsum, 789</p>
+            </div>
+        </div>
+    </main>
+    <footer class="text-light text-center py-3">
+        <p>&copy; 2024 QualquerCoisa20Conto - <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
+    </footer>
 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
