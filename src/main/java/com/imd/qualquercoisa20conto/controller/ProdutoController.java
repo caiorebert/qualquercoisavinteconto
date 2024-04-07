@@ -55,11 +55,12 @@ public class ProdutoController {
         return "produto/cadastrar";
     }
 
-    @RequestMapping("/save")
-    public String editarProduto(@ModelAttribute("produto") Produto produto, Model model){
+    @RequestMapping("/{vendedor_id}/save")
+    public String editarProduto(@PathVariable Long vendedor_id, @ModelAttribute("produto") Produto produto, Model model){
+        Vendedor vendedor = vendedorService.getVendedorById(vendedor_id);
+        produto.setVendedor(vendedor);
         produtoService.salvar(produto);
-        model.addAttribute("produto", produto);
-        return "produto/cadastrar";
+        return "redirect:/vendedor/" + vendedor.getId();
     }
 
     @RequestMapping("/deletar/{id}")
