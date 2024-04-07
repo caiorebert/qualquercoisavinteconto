@@ -92,22 +92,22 @@
     <main>
         <div class="form-container">
             <h2>Cadastro de Produto</h2>
-            <form>
+            <form method="post" th:action="@{'/produto/' + ${vendedor.getId()} + '/save'}" th:object="${produto}">
                 <div class="form-group">
                     <label for="inputNome">Nome do Produto</label>
-                    <input type="text" class="form-control" id="inputNome" placeholder="Nome do Produto">
+                    <input type="text" th:field="*{nome}" class="form-control" id="inputNome" placeholder="Nome do Produto">
                 </div>
                 <div class="form-group">
                     <label for="inputPreco">Preço do Produto (R$)</label>
-                    <input type="number" class="form-control" id="inputPreco" placeholder="Preço do Produto">
+                    <input type="number" th:field="*{preco}" class="form-control" id="inputPreco" placeholder="Preço do Produto">
                 </div>
                 <div class="form-group">
                     <label for="inputLinkImage">Link da Imagem</label>
-                    <input type="text" class="form-control" id="inputLinkImage" placeholder="Link da Imagem">
+                    <input type="text" th:field="*{image}" class="form-control" id="inputLinkImage" placeholder="Link da Imagem">
                 </div>
                 <div class="form-group">
                     <label for="inputQuantidade">Quantidade</label>
-                    <input type="number" class="form-control" id="inputQuantidade" placeholder="Quantidade">
+                    <input type="number" th:field="*{quantidade}" class="form-control" id="inputQuantidade" placeholder="Quantidade">
                 </div>
                 <button type="submit" class="btn btn-cadastrar">Cadastrar Produto</button>
             </form>
