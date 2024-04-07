@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -71,10 +72,11 @@ public class VendedorController {
 
     @RequestMapping("/save")
     public String saveVendedor(@ModelAttribute("vendedor") Vendedor vendedor,
-                               Model model) {
+                               Model model,
+                               RedirectAttributes redirectAttributes) {
         vendedorService.salvar(vendedor);
-        model.addAttribute("vendedor", vendedor);
-        return "redirect:/";
+        redirectAttributes.addAttribute("vendedor", vendedor);
+        return "redirect:/vendedor/" + vendedor.getId();
     }
 
     @RequestMapping("/{id}")

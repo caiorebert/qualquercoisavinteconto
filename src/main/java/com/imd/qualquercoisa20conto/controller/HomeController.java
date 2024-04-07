@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,8 +22,8 @@ public class HomeController {
     ProdutoService produtoService;
 
     @RequestMapping("/")
-    public String home(@ModelAttribute("usuario") Usuario usuario, Model model){
-        if (usuario.getId()!=null) {
+    public String home(@RequestParam(value = "usuario", required = false) Usuario usuario, Model model){
+        if (usuario!=null) {
             model.addAttribute("usuario", usuario);
         }
         List<Produto> produtos = produtoService.getAllProdutos();
