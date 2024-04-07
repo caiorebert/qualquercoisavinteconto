@@ -26,7 +26,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(@ModelAttribute("usuario") Usuario usuario, Model model){
-        if (usuario!=null) {
+        if (usuario.getId()!=null) {
             model.addAttribute("usuario", usuario);
         }
         List<Produto> produtos = produtoService.getAllProdutos();

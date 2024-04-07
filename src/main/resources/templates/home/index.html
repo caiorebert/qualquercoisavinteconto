@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,17 +89,17 @@
             <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
             <a class="navbar-brand" href="/">QualquerCoisa20Conto</a>
             <a class="navbar-brand">Home</a>
-            <th:block th:if="${usuario.getVendedor() == null}">
+            <div th:if="${usuario.getId() != null && usuario.getVendedor() == null}">
                 <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getId()} + '/novo'}">Tornar-se vendedor</a>
-            </th:block>
-            <th block th:if="${usuario.getVendedor() != null}">
+            </div>
+            <div th:if="${usuario.getVendedor() != null}">
                 <a class="navbar-brand">Cadastrar produtos</a>
                 <a class="navbar-brand">Meus produtos</a>
-            </th:block>
+            </div>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <th:block th:if="${usuario == null}">
+                    <th:block th:if="${usuario.getId() == null}">
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Login</a>
                         </li>
@@ -107,7 +107,7 @@
                             <a class="nav-link" href="/cadastro">Cadastro</a>
                         </li>
                     </th:block>
-                    <th:block th:if="${usuario != null}">
+                    <th:block th:if="${usuario.getId() != null}">
                         <li  class="nav-item">
                             <form method="get" action="/usuario/deslogar">
                                 <button type="submit" class="nav-link">Sair</button>
@@ -120,14 +120,14 @@
     <main class="container">
         <h2 class="title-main">Produtos</h2>
         <div class="row div-main">
-            <th:block th:each="produto : ${produtos}">
+            <div th:each="produto : ${produtos}">
                 <div class="col-md-4 mb-4">
                     <img th:src="${produto.image}" class="img-fluid" alt="Imagem do Produto">
                     <p th:text="${produto.nome}"></p>
                     <p th:text="'R$ ' + ${produto.preco}"></p>
                     <p th:text="'Quantidade: ' + ${produto.quantidade}"></p>
                 </div>
-            </th:block>
+            </div>
         </div>
     </main>
     <footer class="text-light text-center py-3">
