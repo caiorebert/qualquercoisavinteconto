@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,8 +102,15 @@
     <main>
         <div class="login-container">
             <h2>Escolha o tipo de login</h2>
+<<<<<<< HEAD
             <a href="/" class="btn btn-login btn-cliente">Entrar como Cliente</a>
             <a href="/" class="btn btn-login btn-vendedor">Entrar como Vendedor</a>
+=======
+
+            <a th:href="'/usuario/redirectHome/' + ${usuario.getId()}" class="btn btn-login btn-cliente">Entrar como Cliente</a>
+
+            <a th:href="'/vendedor/' + ${vendedor.getId()}" class="btn btn-login btn-vendedor">Entrar como Vendedor</a>
+>>>>>>> e9201d9e32bcabbd0c05b2f41562148d5ace222a
         </div>
     </main>
     <footer class="text-light text-center py-3">
