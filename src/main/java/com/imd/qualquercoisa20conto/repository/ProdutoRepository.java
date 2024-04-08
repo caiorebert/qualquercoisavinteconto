@@ -13,7 +13,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     @Query(value = "select p from Produto p where p.vendedor = :vendedor and p.deletedAt is null")
     List<Produto> getProdutosByVendedor(Vendedor vendedor);
 
-    @Query(value = "select p from Produto p where p.deletedAt is null")
+    @Query(value = "select p from Produto p where p.deletedAt is null and p.quantidade > 0")
     List<Produto> getAllProdutos();
 
     @Query(value = "select p from Produto p where p.id = :id and p.deletedAt is null")
