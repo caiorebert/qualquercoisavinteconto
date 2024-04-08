@@ -23,11 +23,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(@RequestParam(value = "usuario", required = false) Usuario usuario, Model model){
-        if (usuario!=null) {
-            model.addAttribute("usuario", usuario);
-        } else {
-            model.addAttribute("usuario", null);
-        }
+        model.addAttribute("usuario", usuario);
         List<Produto> produtos = produtoService.getAllProdutos();
         model.addAttribute("produtos", produtos);
         return "home/index";
