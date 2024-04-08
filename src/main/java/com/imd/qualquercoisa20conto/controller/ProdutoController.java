@@ -65,7 +65,9 @@ public class ProdutoController {
 
     @RequestMapping("/deletar/{id}")
     public String deletarProduto(@PathVariable("id") Long id){
+        Produto produto = produtoService.getProdutoById(id);
+        Long idVendedor = produto.getVendedor().getId();
         produtoService.safeDeleteById(id);
-        return "redirect:/produto/listar";
+        return "redirect:/vendedor/" + idVendedor;
     }
 }
