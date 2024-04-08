@@ -125,7 +125,7 @@
                     <p th:text="${produto.nome}"></p>
                     <p th:text="'R$ ' + ${produto.preco}"></p>
                     <p th:text="'Quantidade: ' + ${produto.quantidade}"></p>
-                    <p th:text="Deletar"></p>
+                    <a th:href="@{'/produto/deletar/'+${produto.getId()}}" th:text="Deletar"></a>
                 </div>
             </div>
         </div>
