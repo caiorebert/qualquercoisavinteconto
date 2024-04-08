@@ -45,7 +45,7 @@ public class EnderecoController {
         model.addAttribute("usuario", usuario);
         model.addAttribute("endereco", enderecos);
 
-        return "endereco/cadastro";
+        return "endereco/index";
     }
 
     @RequestMapping("/{usuario_id}/novo")
@@ -64,7 +64,8 @@ public class EnderecoController {
     public String editEndereco(@PathVariable("id") Long id, Model model) {
 
         Endereco endereco = enderecoService.getEnderecoById(id);
-
+        Usuario usuario = endereco.getUsuario();
+        model.addAttribute("usuario", usuario);
         model.addAttribute("endereco", endereco);
 
         return "endereco/cadastro";

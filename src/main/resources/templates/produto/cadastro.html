@@ -85,7 +85,8 @@
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand nav-itens" href="#">
                 <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
-                QualquerCoisa20Conto
+                <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">QualquerCoisa20Conto</a>
+                <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">Home</a>
             </a>
         </nav>
     </header>

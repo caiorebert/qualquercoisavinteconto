@@ -84,26 +84,19 @@
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand nav-itens" href="#">
                 <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
-                QualquerCoisa20Conto
+                <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">QualquerCoisa20Conto</a>
+                <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">Home</a>
             </a>
         </nav>
     </header>
     <main>
         <div class="endereco-list">
-            <div class="endereco-item">
-                <h4>Endereço 1</h4>
-                <p>CEP: 12345-678</p>
-                <p>Rua: Exemplo, 123</p>
-            </div>
-            <div class="endereco-item">
-                <h4>Endereço 2</h4>
-                <p>CEP: 98765-432</p>
-                <p>Rua: Teste, 456</p>
-            </div>
-            <div class="endereco-item">
-                <h4>Endereço 3</h4>
-                <p>CEP: 54321-876</p>
-                <p>Rua: Lorem Ipsum, 789</p>
+            <div th:each="endereco : ${enderecos}">
+                <div class="endereco-item">
+                    <p th:text="'CEP: ' + ${endereco.getCep()}"></p>
+                    <p th:text="'Rua: ' + ${endereco.getRua()}"></p>
+                    <p th:text="'Número: ' + ${endereco.getNumero()}"></p>
+                </div>
             </div>
         </div>
     </main>
