@@ -87,14 +87,14 @@
 <header>
     <nav class="navbar navbar-expand-lg">
         <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
-        <a class="navbar-brand" href="/">QualquerCoisa20Conto</a>
+        <a class="navbar-brand">QualquerCoisa20Conto</a>
         <a class="navbar-brand">Home</a>
         <div th:if="${usuario != null && usuario.getVendedor() == null}">
             <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getId()} + '/novo'}">Tornar-se vendedor</a>
         </div>
         <div th:if="${usuario != null && usuario.getVendedor() != null}">
-            <a class="navbar-brand">Cadastrar produtos</a>
-            <a class="navbar-brand">Meus produtos</a>
+            <a class="navbar-brand" th:href="@{'/produto/' + ${usuario.getVendedor().getId()} + '/novo'}">Cadastrar produtos</a>
+            <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getVendedor().getId()}}">Meus produtos</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
