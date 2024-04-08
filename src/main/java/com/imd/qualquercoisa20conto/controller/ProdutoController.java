@@ -45,6 +45,7 @@ public class ProdutoController {
         Vendedor vendedor = vendedorService.getVendedorById(vendedor_id);
         model.addAttribute("produto", new Produto());
         model.addAttribute("vendedor", vendedor);
+        model.addAttribute("usuario", vendedor.getUsuario());
         return "produto/cadastro";
     }
 
@@ -56,7 +57,7 @@ public class ProdutoController {
     }
 
     @RequestMapping("/{vendedor_id}/save")
-    public String editarProduto(@PathVariable Long vendedor_id, @ModelAttribute("produto") Produto produto, Model model){
+    public String salvarProduto(@PathVariable Long vendedor_id, @ModelAttribute("produto") Produto produto, Model model){
         Vendedor vendedor = vendedorService.getVendedorById(vendedor_id);
         produto.setVendedor(vendedor);
         produtoService.salvar(produto);

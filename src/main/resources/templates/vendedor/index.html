@@ -93,8 +93,7 @@
                 <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getId()} + '/novo'}">Tornar-se vendedor</a>
             </div>
             <div th:if="${usuario != null && usuario.getVendedor() != null}">
-                <a class="navbar-brand">Cadastrar produtos</a>
-                <a class="navbar-brand">Meus produtos</a>
+                <a class="navbar-brand" th:href="@{'/produto/' + ${usuario.getVendedor().getId()} + '/novo'}">Cadastrar produto</a>
             </div>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -102,7 +101,7 @@
                     <th:block th:if="${vendedor != null}">
                         <li>
                             <div class="mt-1 mr-1">
-                                <label th:text="'Olá, ' + ${vendedor.getNome()}"></label>
+                                <label style="color: white;" th:text="'Olá, ' + ${vendedor.getNome()}"></label>
                             </div>
                         </li>
                         <li  class="nav-item">

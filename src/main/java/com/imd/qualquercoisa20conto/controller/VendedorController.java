@@ -80,7 +80,7 @@ public class VendedorController {
     }
 
     @RequestMapping("/{id}")
-    public String vendedorCadastrado(@PathVariable("id") Long id, Model model) {
+    public String index(@PathVariable("id") Long id, Model model) {
         Vendedor vendedor = vendedorService.getVendedorById(id);
         Usuario usuario = vendedor.getUsuario();
         List<Produto> produtos = produtoService.getProdutosByVendedor(vendedor);
