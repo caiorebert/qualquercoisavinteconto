@@ -22,7 +22,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Set;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/endereco")
@@ -71,18 +74,26 @@ public class EnderecoController {
         return "endereco/cadastro";
     }
 
-    @RequestMapping("/save")
-    public String saveEndereco(@ModelAttribute("endereco") Endereco endereco, Model model) {
+    @RequestMapping("/{usuario_id}/save")
+    public String saveEndereco(@PathVariable Long usuario_id, @ModelAttribute("endereco") Endereco endereco, RedirectAttributes redirectAttributes) {
 
-        if (endereco.getId()==null) {
+            Usuario usuario = usuarioService.getUsuarioById(usuario_id);
+
+            endereco.setUsuario(usuario);
+
+            Set<Endereco> lista_Enderecos = usuario.getEndereco();
+            lista_Enderecos.add(endereco);
+            usuario.setEndereco(lista_Enderecos);
+    
             enderecoService.salvar(endereco);
-            return "endereco/cadastro";
-        }
 
-        model.addAttribute("endereco", endereco);
-        enderecoService.salvar(endereco);
-        return "endereco/cadastro";
-    }
+            Vendedor vendedor = usuario.getVendedor();
+            
+            redirectAttributes.addAttribute("usuario",usuario);
+            redirectAttributes.addAttribute("vendedor", vendedor);
+
+            return "redirect:/";
+      }
 
     @RequestMapping("/deletar/{id}")
     public String deletarEndereco(@PathVariable("id") Long id, @ModelAttribute("endereco") Endereco endereco, Model model) {
