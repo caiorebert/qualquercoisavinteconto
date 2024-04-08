@@ -16,6 +16,4 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
     @Query(value = "select e from Endereco e where e.usuario = :usuario")
     List<Endereco> getEnderecosByIdUsuario(Usuario usuario);
 
-    @Query(value = "UPDATE Usuario u SET u.deletedAt = :timestamp where u.id = :id")
-    void safeDeleteById(Long id, LocalDateTime timestamp);
 }

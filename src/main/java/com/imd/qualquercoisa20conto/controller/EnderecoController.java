@@ -88,7 +88,7 @@ public class EnderecoController {
 
         Usuario usuario = usuarioService.getUsuarioById(id);
 
-        enderecoService.safeDeleteById(endereco.getId());
+        enderecoService.safeDelete(endereco);
 
         model.addAttribute("usuario", usuario);
 

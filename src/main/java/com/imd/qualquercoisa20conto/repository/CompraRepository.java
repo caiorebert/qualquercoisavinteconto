@@ -16,6 +16,4 @@ public interface CompraRepository extends JpaRepository<Compra, Integer> {
     @Query(value = "select e from Compra e where e.usuario = :usuario")
     List<Compra> getComprasByIdUsuario(Usuario usuario);
 
-    @Query(value = "UPDATE Usuario u SET u.deletedAt = :timestamp where u.id = :id")
-    void safeDeleteById(Long id, LocalDateTime timestamp);
 }

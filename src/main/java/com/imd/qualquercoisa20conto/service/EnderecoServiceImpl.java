@@ -31,7 +31,8 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public void safeDeleteById(Long id) {
-        enderecoRepository.safeDeleteById(id, LocalDateTime.now());
+    public void safeDelete(Endereco endereco) {
+        endereco.setDeletedAt(LocalDateTime.now());
+        enderecoRepository.save(endereco);
     }
 }

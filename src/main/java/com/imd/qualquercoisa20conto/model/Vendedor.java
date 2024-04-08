@@ -3,6 +3,7 @@ package com.imd.qualquercoisa20conto.model;
 import jakarta.persistence.*;
 import org.hibernate.mapping.Join;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,9 @@ public class Vendedor {
 
     @Column(length = 400)
     private String descricao;
+
+    @Column
+    private LocalDateTime deletedAt;
 
     @OneToOne
     @JoinColumn(name = "usuario_id")
@@ -65,5 +69,13 @@ public class Vendedor {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

@@ -2,6 +2,8 @@ package com.imd.qualquercoisa20conto.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "endereco")
 public class Endereco {
@@ -18,6 +20,9 @@ public class Endereco {
 
     @Column
     private int numero;
+
+    @Column
+    private LocalDateTime deletedAt;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -63,5 +68,11 @@ public class Endereco {
         this.numero = numero;
     }
 
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
 
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 }

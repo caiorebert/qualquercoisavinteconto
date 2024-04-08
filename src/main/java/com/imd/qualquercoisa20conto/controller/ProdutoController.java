@@ -67,7 +67,7 @@ public class ProdutoController {
     public String deletarProduto(@PathVariable("id") Long id){
         Produto produto = produtoService.getProdutoById(id);
         Long idVendedor = produto.getVendedor().getId();
-        produtoService.safeDeleteById(id);
+        produtoService.safeDelete(produto);
         return "redirect:/vendedor/" + idVendedor;
     }
 }

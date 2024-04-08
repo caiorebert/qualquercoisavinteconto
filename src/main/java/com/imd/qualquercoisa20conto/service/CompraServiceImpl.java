@@ -31,7 +31,8 @@ public class CompraServiceImpl implements CompraService {
     }
 
     @Override
-    public void safeDeleteById(Long id) {
-        compraRepository.safeDeleteById(id, LocalDateTime.now());
+    public void safeDelete(Compra compra) {
+        compra.setDeletedAt(LocalDateTime.now());
+        compraRepository.save(compra);
     }
 }

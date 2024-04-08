@@ -22,8 +22,9 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public void safeDeleteById(Long id) {
-        produtoRepository.safeDeleteById(id, LocalDateTime.now());
+    public void safeDelete(Produto produto) {
+        produto.setDeletedAt(LocalDateTime.now());
+        produtoRepository.save(produto);
     }
 
     @Override

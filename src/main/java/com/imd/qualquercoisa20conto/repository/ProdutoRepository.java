@@ -28,6 +28,4 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     @Query(value = "select p from Produto p where :precoMax <= p.preco AND p.preco >= :precoMin and p.deletedAt is null")
     List<Produto> getProdutosByPrecoMinPrecoMax(float precoMin, float precoMax);
 
-    @Query(value = "UPDATE Produto p SET p.deletedAt = :timestamp where p.id = :id")
-    void safeDeleteById(Long id, LocalDateTime timestamp);
 }

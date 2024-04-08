@@ -12,6 +12,4 @@ public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
     @Query(value = "select v from Vendedor v where v.id = :id")
     Vendedor getVendedorById(Long id);
 
-    @Query(value = "UPDATE Usuario u SET u.deletedAt = :timestamp where u.id = :id")
-    void safeDeleteById(Long id, LocalDateTime timestamp);
 }

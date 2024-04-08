@@ -26,7 +26,8 @@ public class VendedorServiceImpl implements VendedorService {
     }
 
     @Override
-    public void safeDeleteById(Long id) {
-        vendedorRepository.safeDeleteById(id, LocalDateTime.now());
+    public void safeDelete(Vendedor vendedor) {
+        vendedor.setDeletedAt(LocalDateTime.now());
+        vendedorRepository.save(vendedor);
     }
 }

@@ -1,5 +1,6 @@
 package com.imd.qualquercoisa20conto.controller;
 
+import com.imd.qualquercoisa20conto.model.Vendedor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import com.imd.qualquercoisa20conto.model.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -28,7 +30,7 @@ public class UsuarioController {
     VendedorService vendedorService;
 
     @PostMapping("/logar")
-    public String logarUsuario(String email, String password, Model model){
+    public String logarUsuario(String email, String password, Model model, RedirectAttributes redirectAttributes){
 
         Usuario usuario = usuarioService.getUsuarioByEmail(email);
 
@@ -42,16 +44,25 @@ public class UsuarioController {
             return "redirect:/login";
         }
 
-        model.addAttribute("usuario",usuario);
 
         if(usuario.getVendedor()== null)
         {
+            redirectAttributes.addAttribute("usuario",usuario);
+            redirectAttributes.addAttribute("vendedor", null);
             return "redirect:/";
         }
 
+        model.addAttribute("usuario",usuario);
         model.addAttribute("vendedor", vendedorService.getVendedorById(usuario.getVendedor().getId()));
 
         return "usuario/escolhaLogin";
+    }
+
+    @RequestMapping("/redirectHome/{id}")
+    public String getUsuario(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+        Usuario usuario = usuarioService.getUsuarioById(id);
+        redirectAttributes.addAttribute("usuario", usuario);
+        return "redirect:/";
     }
 
     @RequestMapping("/novo")
@@ -68,19 +79,30 @@ public class UsuarioController {
     }
 
     @RequestMapping("/save")
-    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario, Model model){
+    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario, Model model, RedirectAttributes requestAttribute){
         usuarioService.salvar(usuario);
-        model.addAttribute("usuario", usuario);
+        requestAttribute.addAttribute("usuario", usuario);
         return "redirect:/";
     }
 
     @RequestMapping("/escolhaTipoLogin")
-    public String verificaLogado(@ModelAttribute("usuario") Usuario usuario, boolean tipo){
-        if (tipo) {
-            return "redirect:/";
-        } else {
+    public String verificaLogado(@RequestParam("usuario") Usuario usuario,
+                                 @RequestParam("vendedor") Vendedor vendedor,
+                                 boolean tipo,
+                                 Model model){
+        model.addAttribute("usuario", usuario);
+
+        if (vendedor!=null) {
+            model.addAttribute("vendedor", vendedor);
             return "redirect:/vendedor/" + usuario.getVendedor().getId();
         }
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/deslogar")
+    public String verificaLogado(){
+        return "redirect:/";
     }
 
 }

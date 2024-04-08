@@ -11,7 +11,7 @@ public interface CompraService {
 
     public void salvar(Compra compra);
 
-    public void safeDeleteById(Long id);
+    public void safeDelete(Compra compra);
 
     public List<Compra> getComprasByUsuario(Usuario usuario);
 

@@ -9,7 +9,7 @@ public interface ProdutoService {
 
     public void salvar(Produto produto);
 
-    public void safeDeleteById(Long id);
+    public void safeDelete(Produto produto);
 
     public Produto getProdutoById(Long id);
 

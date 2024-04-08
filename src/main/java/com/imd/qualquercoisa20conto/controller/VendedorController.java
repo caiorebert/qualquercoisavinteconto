@@ -92,7 +92,7 @@ public class VendedorController {
 
     @RequestMapping("/delete/{id}")
     public String deleteVendedor(@PathVariable("id") Long id, Model model) {
-        vendedorService.safeDeleteById(id);
+        vendedorService.safeDelete(vendedorService.getVendedorById(id));
         return "vendedor/index";
     }
 }

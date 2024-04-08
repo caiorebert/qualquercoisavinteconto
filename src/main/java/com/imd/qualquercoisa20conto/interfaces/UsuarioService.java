@@ -6,7 +6,7 @@ public interface UsuarioService {
 
     public void salvar(Usuario usuario);
 
-    public void safeDeleteById(Long id);
+    public void safeDelete(Usuario usuario);
 
     public Usuario getUsuarioById(Long id);
 

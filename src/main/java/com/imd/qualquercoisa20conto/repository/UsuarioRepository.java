@@ -14,6 +14,4 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query(value = "select u from Usuario u where u.id = :id")
     Usuario getUsuarioById(Long id);
 
-    @Query(value = "UPDATE Usuario u SET u.deletedAt = :timestamp where u.id = :id")
-    void safeDeleteById(Long id, LocalDateTime timestamp);
 }

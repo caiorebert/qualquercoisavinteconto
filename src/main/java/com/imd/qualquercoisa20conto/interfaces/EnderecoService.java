@@ -11,7 +11,7 @@ public interface EnderecoService {
 
     public void salvar(Endereco endereco);
 
-    public void safeDeleteById(Long id);
+    public void safeDelete(Endereco endereco);
 
     public List<Endereco> getEnderecosByUsuario(Usuario usuario);
 

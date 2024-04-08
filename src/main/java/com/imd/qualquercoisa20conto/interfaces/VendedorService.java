@@ -8,5 +8,5 @@ public interface VendedorService {
 
     public Vendedor getVendedorById(Long id);
 
-    public void safeDeleteById(Long id);
+    public void safeDelete(Vendedor vendedor);
 }

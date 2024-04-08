@@ -21,8 +21,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void safeDeleteById(Long id) {
-        usuarioRepository.safeDeleteById(id, LocalDateTime.now());
+    public void safeDelete(Usuario usuario) {
+        usuario.setDeletedAt(LocalDateTime.now());
+        usuarioRepository.save(usuario);
     }
 
     @Override
