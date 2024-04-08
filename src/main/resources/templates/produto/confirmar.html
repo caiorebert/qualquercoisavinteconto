@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualquerCoisa20Conto</title>
+    <link rel="icon" type="image/png" href="/images/Qualquercoisa20conto.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            background-color: #131921;
+        }
+
+        nav {
+            background-color: #131921;
+        }
+
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            background-color: #FD9F0A;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        main {
+            flex: 1;
+            margin-bottom: 20px;
+            width: 80vw;
+        }
+
+        .title-main{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .div-main {
+            background-color: #FD9F0A;
+            padding-top: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        footer {
+            background-color: #131921;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .navbar-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .navbar-links ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-links ul li {
+            margin: 0 10px;
+        }
+
+        .navbar-links ul li a {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
+        <a class="navbar-brand">QualquerCoisa20Conto</a>
+        <a class="navbar-brand">Home</a>
+        <div th:if="${usuario != null && usuario.getVendedor() == null}">
+            <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getId()} + '/novo'}">Tornar-se vendedor</a>
+        </div>
+        <div th:if="${usuario != null && usuario.getVendedor() != null}">
+            <a class="navbar-brand" th:href="@{'/produto/' + ${usuario.getVendedor().getId()} + '/novo'}">Cadastrar produtos</a>
+            <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getVendedor().getId()}}">Meus produtos</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <th:block th:if="${usuario == null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cadastro">Cadastro</a>
+                    </li>
+                </th:block>
+                <th:block th:if="${usuario != null}">
+                    <li>
+                        <div class="mt-1 mr-1">
+                            <label style="color: white;" th:text="'Olá, ' + ${usuario.getNome()}"></label>
+                        </div>
+                    </li>
+                    <li  class="nav-item">
+                        <form method="get" action="/usuario/deslogar">
+                            <button type="submit" class="nav-link">Sair</button>
+                        </form>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <h2 class="title-main">Produtos</h2>
+    <div class="row div-main">
+        <div>
+            <div class="col-md-4 mb-4">
+                <img th:src="${produto.image}" class="img-fluid" alt="Imagem do Produto">
+                <p th:text="${produto.nome}"></p>
+                <p th:text="'R$ ' + ${produto.preco}"></p>
+                <br>
+            </div>
+            <div>
+                <form action="#" method="post">
+                    <fieldset>
+                        <legend>Selecione um endereço para entrega:</legend>
+                        <div th:each="endereco : ${usuario.getEndereco()}">
+                            <label>
+                                <input type="radio" th:name="enderecoSelecionado" th:value="${endereco.id}" />
+                                <span th:text="${endereco.rua + ', ' + endereco.numero + ', ' + endereco.cep}" ></span>
+                            </label><br />
+                        </div>
+                    </fieldset>
+                    <input type="submit" value="Selecionar" />
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="text-light text-center py-3">
+    <p>&copy; 2024 QualquerCoisa20Conto - <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
+</footer>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
