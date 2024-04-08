@@ -134,6 +134,7 @@
                 <p th:text="${produto.nome}"></p>
                 <p th:text="'R$ ' + ${produto.preco}"></p>
                 <p th:text="'Quantidade: ' + ${produto.quantidade}"></p>
+                <a th:href="@{'/produto/comprar/' + ${produto.getId()} + '/usuario/' + ${usuario.getId()}}" th:text="Comprar"></a>
             </div>
         </div>
     </div>
