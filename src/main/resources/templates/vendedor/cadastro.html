@@ -96,7 +96,7 @@
             <form method="post" th:action="@{/vendedor/save}" th:object="${vendedor}">
                 <div class="form-group">
                     <label for="inputNomeLoja">Nome da Loja</label>
-                    <input type="text" class="form-control" id="inputNomeLoja" th:field="*{nome}" placeholder="Nome da Loja">
+                    <input type="text" class="form-control" id="inputNomeLoja" th:field="*{nome}" placeholder="Nome da Loja" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="inputDescricao">Descrição da Loja</label>

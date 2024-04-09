@@ -99,11 +99,11 @@
             <form method="post" th:action="@{/usuario/save}" th:object="${usuario}">
                 <div class="form-group">
                     <label for="inputNome">Nome</label>
-                    <input type="text" class="form-control form-control-lg" th:field="*{nome}" id="inputNome" placeholder="Seu nome">
+                    <input type="text" class="form-control form-control-lg" th:field="*{nome}" id="inputNome" placeholder="Seu nome" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control form-control-lg" th:field="*{email}" id="inputEmail" placeholder="Seu email">
+                    <input type="email" class="form-control form-control-lg" th:field="*{email}" id="inputEmail" placeholder="Seu email" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="inputPassword">Senha</label>
