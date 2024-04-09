@@ -81,6 +81,55 @@
         .navbar-links ul li a {
             color: #fff;
         }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .card-img-top {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .card-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .buttonComprar, .buttonLogin {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            border-radius: 3px;
+        }
+        
+        .buttonComprar {
+            background-color: #FD9F0A;
+            border: none;
+            color: #fff;
+        }
+        
+        .buttonLogin {
+            background-color: #6c757d;
+            border: none;
+            color: #fff;
+        }        
+        main{
+            background-color: #FD9F0A;
+        }
     </style>
 </head>
 <body>
@@ -127,15 +176,21 @@
 </header>
 <main class="container">
     <h2 class="title-main">Produtos</h2>
-    <div class="row div-main">
-        <div th:each="produto : ${produtos}">
-            <div class="col-md-4 mb-4">
-                <img th:src="${produto.image}" class="img-fluid" alt="Imagem do Produto">
-                <p th:text="${produto.nome}"></p>
-                <p th:text="'R$ ' + ${produto.preco}"></p>
-                <p th:text="'Quantidade: ' + ${produto.quantidade}"></p>
-                <a th:if="${usuario != null}" th:href="@{'/produto/comprar/' + ${produto.getId()} + '/usuario/' + ${usuario.getId()}}" th:text="Comprar"></a>
-                <a th:if="${usuario == null}" th:href="@{/login}">Faça login para comprar</a>
+    <div class="row">
+        <div th:each="produto : ${produtos}" class="col-md-3 mb-3">
+            <div class="card">
+                <img th:src="${produto.image}" class="card-img-top" alt="Imagem do Produto">
+                <div class="card-body">
+                    <h6 class="card-title" th:text="${produto.nome}"></h6>
+                    <p class="card-text" th:text="'R$ ' + ${produto.preco}"></p>
+                    <p class="card-text" th:text="'Quantidade: ' + ${produto.quantidade}"></p>
+                    <div th:if="${usuario != null}">
+                        <a th:href="@{'/produto/comprar/' + ${produto.getId()} + '/usuario/' + ${usuario.getId()}}" class="btn buttonComprar btn-sm">Comprar</a>
+                    </div>
+                    <div th:if="${usuario == null}">
+                        <a href="/login" class="btn buttonLogin btn-sm">Faça login</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
