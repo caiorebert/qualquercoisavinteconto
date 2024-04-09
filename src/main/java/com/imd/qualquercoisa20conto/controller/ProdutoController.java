@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.imd.qualquercoisa20conto.model.Usuario;
+import com.imd.qualquercoisa20conto.interfaces.UsuarioService;
 
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class ProdutoController {
     @Qualifier("vendedorServiceImpl")
     VendedorService vendedorService;
 
+    @Autowired
+    UsuarioService usuarioService;
+    
     @RequestMapping("/listar")
     public String getProdutos(Model model){
         List<Produto> produtos = produtoService.getAllProdutos();

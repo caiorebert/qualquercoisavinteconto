@@ -97,7 +97,7 @@
     </header>
     <main>
         <div class="cadastro-container">
-            <form method="post" th:action="@{/endereco/save}" th:object="${endereco}">
+            <form method="post" th:action="@{'/endereco/' + ${usuario.getId()} +'/save'}" th:object="${endereco}">
                 <div class="form-group">
                     <label for="inputCEP">CEP</label>
                     <input type="text" class="form-control form-control-lg" th:field="*{cep}" id="inputCEP" placeholder="Seu CEP">
