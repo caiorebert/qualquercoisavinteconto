@@ -77,12 +77,4 @@ public class ProdutoController {
         return "redirect:/vendedor/" + idVendedor;
     }
 
-    @RequestMapping("/comprar/{produto_id}/usuario/{usuario_id}")
-    public String comprarProduto(@PathVariable("produto_id") Long produto_id, @PathVariable("usuario_id") Long usuario_id, Model model){
-        Produto produto = produtoService.getProdutoById(produto_id);
-        Usuario usuario = usuarioService.getUsuarioById(usuario_id);
-        model.addAttribute("produto", produto);
-        model.addAttribute("usuario", usuario);
-        return "produto/confirmar";
-    }
 }

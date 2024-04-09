@@ -18,7 +18,7 @@
             padding: 0;
             background-color: #131921;
         }
-        
+
         nav {
             background-color: #131921;
         }
@@ -46,7 +46,7 @@
             color: #fff;
         }
 
-        .div-main {
+        main {
             background-color: #FD9F0A;
             padding-top: 40px;
             padding-left: 20px;
@@ -81,58 +81,68 @@
         .navbar-links ul li a {
             color: #fff;
         }
+
+        .buttonComprar {
+            background-color: #FD9F0A;
+            border: none;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
-            <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">QualquerCoisa20Conto</a>
-            <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">Home</a>
-            <div th:if="${usuario != null && usuario.getVendedor() == null}">
-                <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getId()} + '/novo'}">Tornar-se vendedor</a>
-            </div>
-            <div th:if="${usuario != null && usuario.getVendedor() != null}">
-                <a class="navbar-brand" th:href="@{'/produto/' + ${usuario.getVendedor().getId()} + '/novo'}">Cadastrar produto</a>
-            </div>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <img src="/images/Qualquercoisa20conto.png" width="80" height="80" class="d-inline-block align-top" alt="" loading="lazy">
+        <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">QualquerCoisa20Conto</a>
+        <a class="navbar-brand" th:href="@{'/usuario/redirectHome/' + ${usuario.getId()}}">Home</a>
+        <div th:if="${usuario != null && usuario.getVendedor() == null}">
+            <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getId()} + '/novo'}">Tornar-se vendedor</a>
+        </div>
+        <div th:if="${usuario != null && usuario.getVendedor() != null}">
+            <a class="navbar-brand" th:href="@{'/produto/' + ${usuario.getVendedor().getId()} + '/novo'}">Cadastrar produto</a>
+        </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <th:block th:if="${vendedor != null}">
-                        <li>
-                            <div class="mt-1 mr-1">
-                                <label style="color: white;" th:text="'Olá, ' + ${vendedor.getNome()}"></label>
-                            </div>
-                        </li>
-                        <li  class="nav-item">
-                            <form method="get" action="/usuario/deslogar">
-                                <button type="submit" class="nav-link">Sair</button>
-                            </form>
-                        </li>
-                    </th:block>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main class="container">
-        <h2 class="title-main">Produtos</h2>
-        <div class="row div-main">
-            <div th:each="produto : ${produtos}">
-                <div class="col-md-4 mb-4">
-                    <img th:src="${produto.image}" class="img-fluid" alt="Imagem do Produto">
-                    <p th:text="${produto.nome}"></p>
-                    <p th:text="'R$ ' + ${produto.preco}"></p>
-                    <p th:text="'Quantidade: ' + ${produto.quantidade}"></p>
-                    <a th:href="@{'/produto/deletar/'+${produto.getId()}}" th:text="Deletar"></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <th:block th:if="${vendedor != null}">
+                    <li>
+                        <div class="mt-1 mr-1">
+                            <label style="color: white;" th:text="'Olá, ' + ${vendedor.getNome()}"></label>
+                        </div>
+                    </li>
+                    <li  class="nav-item">
+                        <form method="get" action="/usuario/deslogar">
+                            <button type="submit" class="nav-link">Sair</button>
+                        </form>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <h2 class="title-main">Produtos cadastrados por você</h2>
+    <div class="row">
+        <div th:each="produto : ${produtos}" class="col-md-3 mb-3">
+            <div class="card">
+                <img th:src="${produto.image}" class="card-img-top" alt="Imagem do Produto">
+                <div class="card-body">
+                    <h6 class="card-title" th:text="${produto.nome}"></h6>
+                    <p class="card-text" th:text="'R$ ' + ${produto.preco}"></p>
+                    <p class="card-text" th:text="'Quantidade: ' + ${produto.quantidade}"></p>
+                    <p>
+                        <a class="btn buttonComprar btn-sm" th:href="@{'/produto/deletar/'+${produto.getId()}}" th:text="Deletar"></a>
+                    </p>
                 </div>
             </div>
         </div>
-    </main>
-    <footer class="text-light text-center py-3">
-        <p>&copy; 2024 QualquerCoisa20Conto - <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
-    </footer>
+    </div>
+</main>
+<footer class="text-light text-center py-3">
+    <p>&copy; 2024 QualquerCoisa20Conto - <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
+</footer>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

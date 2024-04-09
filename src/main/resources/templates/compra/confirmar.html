@@ -168,30 +168,71 @@
     </nav>
 </header>
 <main class="container">
-    <h2 class="title-main">Produtos</h2>
-    <div class="row div-main">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img th:src="${produto.image}" class="card-img-top img-fluid" alt="Imagem do Produto">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${produto.getNome()}"></h5>
-                    <p class="card-text" th:text="'R$ ' + ${produto.getPreco()}"></p>
-                    <p class="card-text" th:text="'Quantidade: ' + ${produto.getQuantidade()}"></p>
-                    <form action="#" method="post">
-                        <fieldset>
-                            <p>Selecione um endereço para entrega:</p>
-                            <div th:each="endereco : ${usuario.getEndereco()}">
-                                <label>
-                                    <input type="radio" th:name="enderecoSelecionado" th:value="${endereco.id}" />
-                                    <span th:text="${endereco.rua + ', ' + endereco.numero + ', ' + endereco.cep}" ></span>
-                                </label><br />
-                            </div>
-                        </fieldset>
-                        <input class="buttonSelecionar" type="submit" value="Selecionar" />
-                    </form>
+    <div class="row" th:if="${!produtoEsgotado}">
+        <form method="post" th:action="@{/compra/save}" th:object="${compra}">
+            <div class="col-md-6">
+                <h2 class="title-main">Produto incluído na compra</h2>
+                <div class="col-md-6">
+                    <div class="card">
+                        <img th:src="${produto.image}" class="card-img-top img-fluid" width="40%" alt="Imagem do Produto">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${produto.getNome()}"></h5>
+                            <p class="card-text" th:text="'R$ ' + ${produto.getPreco()}"></p>
+                            <p class="card-text" th:text="'Quantidade: ' + ${produto.getQuantidade()}"></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h2 class="title-main">Endereço para entrega: </h2>
+                <div class="col-md-12">
+                    <fieldset>
+                        <p>Selecione um endereço para entrega:</p>
+                        <table class="table">
+                            <thead>
+                            <th>
+                                Rua
+                            </th>
+                            <th>
+                                Número
+                            </th>
+                            <th>
+                                CEP
+                            </th>
+                            <th>
+                                Selecionar
+                            </th>
+                            </thead>
+                            <tbody>
+                            <tr th:each="endereco : ${usuario.getEndereco()}">
+                                <td>
+                                    <label th:text="${endereco.rua}"></label>
+                                </td>
+                                <td>
+                                    <label th:text="${endereco.numero}"></label>
+                                </td>
+                                <td>
+                                    <label th:text="${endereco.cep}"></label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input name="endereco" type="radio" th:value="${endereco.getId()}" th:field="*{endereco}" />
+                                    </label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                    <input type="hidden" th:value="${usuario.getId()}" th:field="*{usuario}"/>
+                    <input type="hidden" th:value="${produto.getId()}" th:field="*{produto}"/>
+
+                    <input class="buttonSelecionar" type="submit" value="COMPRAR" />
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
+    <div th:if="${produtoEsgotado}">
+        <h1>Oh, que pena! Esse produto já esgotou!</h1>
+        <a class="buttonSelecionar" th:href="'/usuario/redirectHome/' + ${usuario.getId()}">Voltar para tela inicial</a>
     </div>
 </main>
 <footer class="text-light text-center py-3">
