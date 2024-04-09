@@ -46,7 +46,7 @@ public class EnderecoController {
         List<Endereco> enderecos = enderecoService.getEnderecosByUsuario(usuario);
 
         model.addAttribute("usuario", usuario);
-        model.addAttribute("endereco", enderecos);
+        model.addAttribute("enderecos", enderecos);
 
         return "endereco/index";
     }

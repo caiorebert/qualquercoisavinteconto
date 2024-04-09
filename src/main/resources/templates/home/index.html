@@ -96,6 +96,7 @@
             <a class="navbar-brand" th:href="@{'/produto/' + ${usuario.getVendedor().getId()} + '/novo'}">Cadastrar produtos</a>
             <a class="navbar-brand" th:href="@{'/vendedor/' + ${usuario.getVendedor().getId()}}">Meus produtos</a>
             <a th:if="${usuario != null}" class="navbar-brand" th:href="@{'/endereco/' + ${usuario.getId()} + '/novo'}">Cadastrar Endereço</a>
+            <a th:if="${usuario != null}" class="navbar-brand" th:href="@{'/endereco/' + ${usuario.getId()} + '/listar'}">Meus Endereços</a>
         </div>     
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

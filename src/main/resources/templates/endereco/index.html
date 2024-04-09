@@ -91,6 +91,7 @@
     </header>
     <main>
         <div class="endereco-list">
+            <h2>Lista de Endereços</h2>
             <div th:each="endereco : ${enderecos}">
                 <div class="endereco-item">
                     <p th:text="'CEP: ' + ${endereco.getCep()}"></p>
