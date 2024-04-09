@@ -13,7 +13,7 @@ public interface CompraRepository extends JpaRepository<Compra, Integer> {
     @Query(value = "select e from Compra e where e.id = :id")
     Compra getCompraById(Long id);
 
-    @Query(value = "select e from Compra e where e.usuario = :usuario")
+    @Query(value = "select e from Compra e where e.usuario = :usuario and e.deletedAt is null")
     List<Compra> getComprasByIdUsuario(Usuario usuario);
 
 }

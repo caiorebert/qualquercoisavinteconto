@@ -71,6 +71,13 @@ public class CompraController {
         produto.setQuantidade(produto.getQuantidade() - 1);
         produtoService.salvar(produto);
         compraService.salvar(compra);
-        return "redirect:/compra/" + compra.getUsuario().getId() + "/novo/" + produto.getId();
+        return "redirect:/compra/" + compra.getUsuario().getId() + "/listar";
+    }
+
+    @RequestMapping("/{compra_id}/cancelar")
+    public String deletar(@PathVariable("compra_id") Long id){
+        Compra compra = compraService.getCompraById(id);
+        compraService.safeDelete(compra);
+        return "redirect:/compra/" + compra.getUsuario().getId() + "/listar";
     }
 }

@@ -93,10 +93,20 @@
     <div class="endereco-list">
         <h2>Lista de Compras</h2>
         <div th:each="compra : ${compras}">
-            <div class="endereco-item">
-                <p th:text="'Valor da compra: ' + ${compra.getProduto().getPreco()}"></p>
-                <p th:text="'Loja: ' + ${compra.getProduto().getVendedor().getNome()}"></p>
-                <p th:text="'Endereço: ' + ${compra.getEndereco().getRua()}"></p>
+            <div class="row endereco-item">
+                <div class="col-md-12">
+                    <div>
+                        <p th:text="'Valor da compra: ' + ${compra.getProduto().getPreco()}"></p>
+                        <p th:text="'Loja: ' + ${compra.getProduto().getVendedor().getNome()}"></p>
+                        <p th:text="'Endereço: ' + ${compra.getEndereco().getRua()}"></p>
+                    </div>
+                </div>
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <a th:href="${'/compra/' + compra.getId() + '/cancelar'}">
+                        Cancelar
+                    </a>
+                </div>
             </div>
         </div>
     </div>
